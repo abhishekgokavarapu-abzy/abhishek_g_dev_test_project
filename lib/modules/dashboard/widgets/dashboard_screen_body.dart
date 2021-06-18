@@ -5,12 +5,12 @@ class DashboardScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          Container(
-            child: Text('Hi'),
-          )
-        ],
+      child: Center(
+        child: Container(
+          child: Text('WELCOME TO VIDEO UPLOADER', style: TextStyle(
+              fontSize: 24.0, fontWeight: FontWeight.w500
+          ),softWrap: true,),
+        ),
       ),
     );
   }
