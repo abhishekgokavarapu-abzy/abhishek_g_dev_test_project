@@ -3,16 +3,12 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FAB extends StatefulWidget {
-  @override
-  _FABState createState() => _FABState();
-}
-
-class _FABState extends State<FAB> {
+class FAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
+        Provider.of<DashboardProvider>(context, listen: false).setVideoAvailable(false);
         showDialog(
           context: context,
           builder: (context) => Consumer<DashboardProvider>(
@@ -23,25 +19,23 @@ class _FABState extends State<FAB> {
                 : AlertDialog(
                     title: Center(child: Text('Select Choice')),
                     content: appData.isVideoAvailable
-                        ? Container(
-                            height: 300.0,
-                            child: Chewie(
-                                controller: appData.getChewieController()),
+                        ? VideoPlayer(
+                            videoPlayerController:
+                                appData.videoPlayerController,
+                            chewieController: appData.getChewieController(),
                           )
-                        : null,
+                        : SizedBox(height: 10,),
                     actions: <Widget>[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                               onPressed: () {
-                                appData.setLoading(true);
                                 appData.record(context, appData);
                               },
                               child: Text('Record')),
                           ElevatedButton(
                               onPressed: () {
-                                appData.setLoading(true);
                                 appData.choose(context, appData);
                               },
                               child: Text('Choose'))
@@ -53,6 +47,33 @@ class _FABState extends State<FAB> {
         );
       },
       child: Icon(Icons.add),
+    );
+  }
+}
+
+class VideoPlayer extends StatefulWidget {
+  final videoPlayerController;
+  final chewieController;
+  VideoPlayer(
+      {@required this.videoPlayerController, @required this.chewieController});
+
+  @override
+  _VideoPlayerState createState() => _VideoPlayerState();
+}
+
+class _VideoPlayerState extends State<VideoPlayer> {
+  @override
+  void dispose() {
+    widget.videoPlayerController.dispose();
+    widget.chewieController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 300.0,
+      child: Chewie(controller: widget.chewieController),
     );
   }
 }
