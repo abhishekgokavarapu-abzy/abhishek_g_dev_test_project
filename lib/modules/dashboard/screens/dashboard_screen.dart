@@ -4,7 +4,6 @@ import 'package:abhishek_g_dev_test_project/modules/dashboard/widgets/dashboard_
 import 'package:abhishek_g_dev_test_project/modules/dashboard/widgets/fab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
 
 class DashboardScreen extends StatelessWidget {

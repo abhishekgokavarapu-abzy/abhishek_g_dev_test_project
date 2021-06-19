@@ -19,7 +19,6 @@ dependencies:
   video_player: ^2.1.6
   provider: ^5.0.0
   image_picker: ^0.8.0+3
-  modal_progress_hud_alt: ^1.0.0
 
 dev_dependencies:
   flutter_test:
